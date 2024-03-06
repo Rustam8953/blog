@@ -6,6 +6,8 @@ import { validationResult } from 'express-validator';
 import {registerValid} from './validations/auth.js';
 import UserModel from './models/User.js';
 
+import authMiddleware from './middleware/authMiddleware.js';
+
 mongoose
 .connect('mongodb+srv://orunbaevr848:89537845840Rustam@cluster0.eh65nx9.mongodb.net/blog?retryWrites=true&w=majority')
 .then(() => console.log('DB ok'))
@@ -78,6 +80,23 @@ app.post('/auth/reg', registerValid, async (req, res) => {
         console.log(error);
         res.status(500).json({
             message: "Не удалось зарегестрироваться"
+        })
+    }
+})
+
+app.get('/auth/me', authMiddleware, async (req, res) => {
+    try {
+        const user = await UserModel.findById(req.userId);
+        if(!user) {
+            return res.status(404).json({
+                message: "Отсутствует пользователь"
+            })
+        }
+        const {passwordHash, ...userData} = user._doc;
+        res.json(userData);
+    } catch (error) {
+        res.status(500).json({
+            message: "Нет доступа"
         })
     }
 })
