@@ -3,10 +3,11 @@ dotenv.config();
 import express from 'express';
 
 import mongoose from 'mongoose';
-import {registerValid} from './validations/auth.js';
+import {registerValid, loginValid, postCreateValid} from './validations/valid.js';
 
 import authMiddleware from './middleware/authMiddleware.js';
 import * as UserController from './controllers/UserController.js';
+import * as PostController from './controllers/PostController.js';
 
 mongoose
 .connect(`mongodb+srv://${process.env.DB_NAME}:${process.env.DB_PASSWORD}@cluster0.5su4pcy.mongodb.net/blog?retryWrites=true&w=majority`)
@@ -17,11 +18,13 @@ const app = express();
 
 app.use(express.json());
 
-app.post('/auth/login', UserController.login)
+app.post('/auth/login',loginValid, UserController.login)
 
 app.post('/auth/reg', registerValid, UserController.register)
 
 app.get('/auth/me', authMiddleware, UserController.checkUser)
+
+app.post('/posts', authMiddleware, postCreateValid, PostController.create)
 
 app.listen(process.env.PORT || 4444, (err) => {
     if(err) {
