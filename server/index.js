@@ -24,6 +24,7 @@ app.get('/auth/me', authMiddleware, UserController.checkUser)
 
 app.post('/posts', authMiddleware, postCreateValid, PostController.create)
 app.get('/posts', PostController.getAll);
+app.get('/posts/:id', PostController.getOne);
 
 app.listen(process.env.PORT || 4444, (err) => {
     if(err) {

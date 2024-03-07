@@ -30,3 +30,38 @@ export const getAll = async (req, res) => {
         })
     }
 }
+
+export const getOne = async (req, res) => {
+    try {
+        const postId = req.params.id;
+        PostModel.findOneAndUpdate(
+            {
+                _id: postId
+            }, {
+                $inc: {viewCount: 1}
+            }, {
+                new: true,
+                returnDocument: 'after'
+            }
+        )
+        .then(doc => {
+            if(!doc) {
+                return res.status(404).json({
+                    message: "Статья не найдена"
+                })
+            }
+            res.json(doc);
+        })
+        .catch(err => {
+            console.log(err);
+            return res.status(500).json({
+                message: "Не удалось получить данные о статье"
+            })
+        })
+    } catch (error) {
+        console.log(error);
+        res.json({
+            message: "Не удалось получить статьи"
+        })
+    }
+}
