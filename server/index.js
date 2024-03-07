@@ -26,6 +26,7 @@ app.post('/posts', authMiddleware, postCreateValid, PostController.create)
 app.get('/posts', PostController.getAll);
 app.get('/posts/:id', PostController.getOne);
 app.delete('/posts/:id', authMiddleware, PostController.removePost);
+app.patch('/posts/:id', authMiddleware, PostController.update);
 
 app.listen(process.env.PORT || 4444, (err) => {
     if(err) {
