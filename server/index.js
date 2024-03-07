@@ -19,12 +19,11 @@ const app = express();
 app.use(express.json());
 
 app.post('/auth/login',loginValid, UserController.login)
-
 app.post('/auth/reg', registerValid, UserController.register)
-
 app.get('/auth/me', authMiddleware, UserController.checkUser)
 
 app.post('/posts', authMiddleware, postCreateValid, PostController.create)
+app.get('/posts', PostController.getAll);
 
 app.listen(process.env.PORT || 4444, (err) => {
     if(err) {

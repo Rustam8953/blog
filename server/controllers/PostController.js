@@ -18,3 +18,15 @@ export const create = async (req, res) => {
         })
     }
 }
+
+export const getAll = async (req, res) => {
+    try {
+        const posts = await PostModel.find().populate('author', "-passwordHash").exec();
+        res.json(posts);
+    } catch (error) {
+        console.log(error);
+        res.json({
+            message: "Не удалось получить статьи"
+        })
+    }
+}
