@@ -6,10 +6,8 @@ import multer from "multer";
 import mongoose from 'mongoose';
 import {registerValid, loginValid, postCreateValid} from './validations/valid.js';
 
-import authMiddleware from './middleware/authMiddleware.js';
-import * as UserController from './controllers/UserController.js';
-import * as PostController from './controllers/PostController.js';
-import handleValid from './middleware/handleValid.js';
+import {UserController, PostController} from './controllers/index.js';
+import { authMiddleware, handleValid } from './middleware/index.js';
 
 mongoose
 .connect(`mongodb+srv://${process.env.DB_NAME}:${process.env.DB_PASSWORD}@cluster0.5su4pcy.mongodb.net/blog?retryWrites=true&w=majority`)
