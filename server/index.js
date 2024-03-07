@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 import express from 'express';
+import multer from "multer";
 
 import mongoose from 'mongoose';
 import {registerValid, loginValid, postCreateValid} from './validations/valid.js';
@@ -8,6 +9,7 @@ import {registerValid, loginValid, postCreateValid} from './validations/valid.js
 import authMiddleware from './middleware/authMiddleware.js';
 import * as UserController from './controllers/UserController.js';
 import * as PostController from './controllers/PostController.js';
+import handleValid from './middleware/handleValid.js';
 
 mongoose
 .connect(`mongodb+srv://${process.env.DB_NAME}:${process.env.DB_PASSWORD}@cluster0.5su4pcy.mongodb.net/blog?retryWrites=true&w=majority`)
@@ -16,17 +18,35 @@ mongoose
 
 const app = express();
 
-app.use(express.json());
+const storage = multer.diskStorage({
+    destination: (_, __, cb) => {
+        cb(null, 'uploads')
+    },
+    filename: (_, file, cb) => {
+        cb(null, file.originalname);
+    }
+})
 
-app.post('/auth/login',loginValid, UserController.login)
-app.post('/auth/reg', registerValid, UserController.register)
+const upload = multer({storage});
+
+app.use(express.json());
+app.use('/upload', express.static('uploads'))
+
+app.post('/auth/login', loginValid, handleValid, UserController.login)
+app.post('/auth/reg', registerValid, handleValid, UserController.register)
 app.get('/auth/me', authMiddleware, UserController.checkUser)
 
-app.post('/posts', authMiddleware, postCreateValid, PostController.create)
+app.post('/upload', authMiddleware, upload.single('image'), (req, res) => {
+    res.json({
+        url: `/uploads/${req.file.originalname}`
+    })
+});
+
+app.post('/posts', authMiddleware, postCreateValid, handleValid, PostController.create)
 app.get('/posts', PostController.getAll);
 app.get('/posts/:id', PostController.getOne);
 app.delete('/posts/:id', authMiddleware, PostController.removePost);
-app.patch('/posts/:id', authMiddleware, PostController.update);
+app.patch('/posts/:id', authMiddleware, handleValid, PostController.update);
 
 app.listen(process.env.PORT || 4444, (err) => {
     if(err) {
