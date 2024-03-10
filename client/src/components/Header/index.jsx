@@ -5,7 +5,7 @@ import Container from '@mui/material/Container';
 
 export const Header = () => {
   return (
-    <div className="root">
+    <div className="root-head">
       <Container maxWidth="lg">
         <div className="inner">
           <a className="logo" href="/">
