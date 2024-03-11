@@ -2,3 +2,14 @@
     margin: 0;
     box-sizing: border-box;
 }
+
+:root {
+    --b-shadow: 0 1px 5px 0 rgba(0,0,0,.16);
+    --body: #F6F6F6;
+}
+
+.sticky {
+    position: sticky;
+    top: 20px;
+    left: 0;
+}

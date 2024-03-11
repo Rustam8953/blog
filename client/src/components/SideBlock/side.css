@@ -1,5 +1,7 @@
 .rootBlock {
   margin-bottom: 20px;
+  box-shadow: var(--b-shadow) !important;
+  background-color: #fff;
 }
 
 .titleBlock {

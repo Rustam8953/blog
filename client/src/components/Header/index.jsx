@@ -4,6 +4,10 @@ import './header.css';
 import Container from '@mui/material/Container';
 
 export const Header = () => {
+  const isAuth = false;
+  const clickOut = () => {
+
+  }
   return (
     <div className="root-head">
       <Container maxWidth="lg">
@@ -11,7 +15,17 @@ export const Header = () => {
           <a className="logo" href="/">
             <div>BLOG</div>
           </a>
-          <div className="buttons">
+          <div className='buttons'>
+            {isAuth ? (
+              <>
+                <a href="/posts/create">
+                  <Button variant="contained">Написать статью</Button>
+                </a>
+                <Button onClick={clickOut} variant="contained" color="error">
+                  Выйти
+                </Button>
+              </>
+            ) : (
               <>
                 <a href="/login">
                   <Button variant="outlined">Войти</Button>
@@ -20,6 +34,7 @@ export const Header = () => {
                   <Button variant="contained">Создать аккаунт</Button>
                 </a>
               </>
+            )}
           </div>
         </div>
       </Container>
