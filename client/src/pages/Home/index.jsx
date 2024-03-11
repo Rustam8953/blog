@@ -1,4 +1,5 @@
 import React from 'react';
+import {useDispatch} from 'react-redux';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Grid from '@mui/material/Grid';
@@ -6,8 +7,13 @@ import Grid from '@mui/material/Grid';
 import { Post } from '../../components/Post';
 import {TagsBlock} from '../../components/TagsBlock';
 import {CommentsBlock} from '../../components/CommentsBlock';
+import { fetchPosts } from '../../redux/slices/post';
 
 export const Home = () => {
+    const uReducer = useDispatch();
+    React.useEffect(() => {
+        uReducer(fetchPosts());
+    }, [])
     return (
         <>
             <Tabs style={{ marginBottom: 15 }} value={0} aria-label="basic tabs example">
@@ -31,6 +37,7 @@ export const Home = () => {
                     commentsCount={3}
                     tags={['react', 'fun', 'typescript']}
                     isEditable
+                    isLoading={true}
                     />
                 ))}
                 </Grid>

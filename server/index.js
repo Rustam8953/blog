@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 import express from 'express';
 import multer from "multer";
+import cors from 'cors';
 
 import mongoose from 'mongoose';
 import {registerValid, loginValid, postCreateValid} from './validations/valid.js';
@@ -28,6 +29,7 @@ const storage = multer.diskStorage({
 const upload = multer({storage});
 
 app.use(express.json());
+app.use(cors());
 app.use('/upload', express.static('uploads'))
 
 app.post('/auth/login', loginValid, handleValid, UserController.login)
