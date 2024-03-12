@@ -6,10 +6,12 @@ import EditIcon from '@mui/icons-material/Edit';
 import EyeIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import CommentIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 import { Link } from 'react-router-dom';
+import style from './post.css';
 
 import './post.css';
 
 import { UserInfo } from '../UserInfo';
+import { PostSkeleton } from './PostSkeleton';
 
 export const Post = ({
   _id,
@@ -25,11 +27,13 @@ export const Post = ({
   isEditable,
   isLoading
 }) => {
-
+  if (isLoading) {
+    return <PostSkeleton />;
+  }
   const onClickRemove = () => {};
 
   return (
-    <div className={clsx('root', { 'rootFull': 'isFullPost' })}>
+    <div className={clsx('root-post', { 'rootFull': 'isFullPost' })}>
       {isEditable && (
         <div className='editButtons'>
           <Link to={`/posts/${_id}/edit`}>

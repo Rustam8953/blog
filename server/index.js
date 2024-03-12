@@ -43,6 +43,7 @@ app.post('/upload', authMiddleware, upload.single('image'), (req, res) => {
 });
 
 app.post('/posts', authMiddleware, postCreateValid, handleValid, PostController.create)
+app.get('/tags', PostController.getLastTag)
 app.get('/posts', PostController.getAll);
 app.get('/posts/:id', PostController.getOne);
 app.delete('/posts/:id', authMiddleware, PostController.removePost);

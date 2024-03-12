@@ -1,16 +1,22 @@
-.root {
+.root-post {
   background-color: #fff;
-  box-shadow: var(--b-shadow);
+  border: 1px solid #dedede;
   border-radius: 6px;
   overflow: hidden;
   margin-bottom: 15px;
   position: relative;
 }
-.root:hover .editButtons {
+.root-post:hover {
+  border: 1px solid #4361ee;
+  box-shadow: 0 0 0 1px #4361ee;
+}
+.root-post:hover .editButtons {
   opacity: 1;
 }
 .rootFull:hover {
   background-color: #fff;
+  border: 1px solid #dedede;
+  box-shadow: none;
 }
 
 .image {
