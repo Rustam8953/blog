@@ -8,7 +8,10 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
 
 export const fetchTags = createAsyncThunk('posts/fetchTags', async () => {
     const {data} = await axios.get('/tags');
-    return data;
+    const newBoxTags = new Set(data);
+    const newArrTags = [...newBoxTags];
+    console.log(newArrTags)
+    return newArrTags;
 })
 
 const initialState = {
