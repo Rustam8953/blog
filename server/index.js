@@ -12,7 +12,7 @@ import { authMiddleware, handleValid } from './middleware/index.js';
 
 mongoose
 .connect(`mongodb+srv://${process.env.DB_NAME}:${process.env.DB_PASSWORD}@cluster0.5su4pcy.mongodb.net/blog?retryWrites=true&w=majority`)
-.then(() => console.log('DB ok'))
+.then(() => console.log('DB ok dfgdgf'))
 .catch(err => console.log('DB error', err))
 
 const app = express();

@@ -14,7 +14,7 @@ import { UserInfo } from '../UserInfo';
 import { PostSkeleton } from './PostSkeleton';
 
 export const Post = ({
-  _id,
+  id,
   title,
   createdAt,
   imageUrl,
@@ -36,7 +36,7 @@ export const Post = ({
     <div className={clsx('root-post', { 'rootFull': 'isFullPost' })}>
       {isEditable && (
         <div className='editButtons'>
-          <Link to={`/posts/${_id}/edit`}>
+          <Link to={`/posts/${id}/edit`}>
             <IconButton color="primary">
               <EditIcon />
             </IconButton>
@@ -57,7 +57,7 @@ export const Post = ({
         <UserInfo {...user} additionalText={createdAt} />
         <div className='indention'>
           <h2 className={clsx('title', { 'titleFull': 'isFullPost' })}>
-            {isFullPost ? title : <Link to={`/posts/${_id}`}>{title}</Link>}
+            {isFullPost ? title : <Link to={`/posts/${id}`}>{title}</Link>}
           </h2>
           <ul className='tags'>
             {tags.map((name) => (
