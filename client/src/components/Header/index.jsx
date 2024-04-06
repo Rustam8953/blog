@@ -12,6 +12,7 @@ export const Header = () => {
   const clickOut = () => {
     if(window.confirm('Хотите выйти из ситемы?')) {
       dispatch(logout());
+      window.localStorage.removeItem('token');
     }
   }
   return (
