@@ -6,7 +6,6 @@ import EditIcon from '@mui/icons-material/Edit';
 import EyeIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import CommentIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 import { Link } from 'react-router-dom';
-import style from './post.css';
 
 import './post.css';
 
