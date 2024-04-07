@@ -12,7 +12,7 @@ import { Navigate } from "react-router-dom";
 export const Login = () => {
     const dispatch = useDispatch();
     const isAuth = useSelector(selectIsAuth);
-    const {register, handleSubmit, setError, formState:{errors, isValid}} = useForm({
+    const {register, handleSubmit, formState:{errors, isValid}} = useForm({
         defaultValues: {
             email: '',
             password: ''
@@ -48,7 +48,7 @@ export const Login = () => {
                 helperText={errors.password?.message}
                 {...register('password', {required: "Укажите пароль"})} fullWidth 
             />
-            <Button type="submit" size="large" variant="contained" fullWidth>
+            <Button disabled={!isValid} type="submit" size="large" variant="contained" fullWidth>
                 Войти
             </Button>
         </form>
