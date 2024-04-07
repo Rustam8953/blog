@@ -10,16 +10,17 @@ import {CommentsBlock} from '../../components/CommentsBlock';
 import { fetchPosts, fetchTags } from '../../redux/slices/post';
 
 export const Home = () => {
-    const uReducer = useDispatch();
+    const dispatch = useDispatch();
+    const userData = useSelector(state => state.auth.data);
     const {posts, tags} = useSelector(state => state.posts);
 
     const isPostLoading = posts.status === 'loading';
     const isTagsLoading = tags.status === 'loading';
-    console.log(posts.status)
+    console.log(userData)
 
     useEffect(() => {
-        uReducer(fetchPosts());
-        uReducer(fetchTags());
+        dispatch(fetchPosts());
+        dispatch(fetchTags());
     }, [])
     return (
         <>
@@ -43,7 +44,7 @@ export const Home = () => {
                                 viewsCount={obj.viewCount}
                                 commentsCount={3}
                                 tags={obj.tags}
-                                isEditable
+                                isEditable={userData?._id == obj.author._id}
                             />
                         )
                     })
