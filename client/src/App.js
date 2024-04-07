@@ -7,6 +7,7 @@ import { PostPage } from './pages/PostPage';
 import { Login } from './pages/Log';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAuthMe, selectIsAuth } from './redux/slices/auth';
+import { Registration } from './pages/Reg';
 
 function App() {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/posts/:id" element={<PostPage />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Registration />} />
         </Routes>
       </Container>
     </>

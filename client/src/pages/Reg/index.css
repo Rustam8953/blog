@@ -1,0 +1,19 @@
+.reg {
+  width: 400px;
+  padding: 50px;
+  border: 1px solid #dedede;
+  margin: 50px auto;
+}
+.reg-field {
+  margin-bottom: 20px !important;
+}
+.reg-title {
+  text-align: center !important;
+  font-weight: 500 !important;
+  margin-bottom: 30px !important;
+}
+.reg-avatar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
